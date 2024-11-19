@@ -2,12 +2,6 @@
 
 A **Weather API** é uma API simples que fornece informações sobre o clima de uma cidade específica. A API integra-se com o serviço OpenWeatherMap para recuperar dados meteorológicos, incluindo temperatura, condições climáticas, visibilidade e informações sobre o vento.
 
-## Funcionalidade
-
-- A API permite consultar informações climáticas para uma cidade específica.
-- As respostas incluem dados como temperatura atual, sensação térmica, temperatura mínima e máxima, condições do tempo e informações sobre o vento.
-- A API também fornece respostas apropriadas para erros, como cidade não encontrada ou falhas de autenticação.
-
 ## Tecnologias Utilizadas
 
 - **Node.js** - Ambiente de execução JavaScript
