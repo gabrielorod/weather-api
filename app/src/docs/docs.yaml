@@ -1,0 +1,167 @@
+openapi: 3.0.0
+info:
+  title: Weather API
+  description: API to display weather information.
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:3000'
+    description: Local server
+paths:
+  /is-alive:
+    get:
+      summary: Check the status of the API
+      description: Endpoint to check if the API is up and running.
+      responses:
+        '200':
+          description: API is active.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AliveResponse'
+  /weather/{city}:
+    get:
+      summary: Get weather information
+      description: Endpoint to retrieve weather information based on provided parameters.
+      parameters:
+        - name: city
+          in: path
+          required: true
+          description: The name of the city to retrieve weather information for.
+          example: 'São Paulo'
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Weather data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+        '400':
+          description: Bad Request - Invalid city name.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        '401':
+          description: Unauthorized - API key is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+        '404':
+          description: City not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+        '429':
+          description: Too Many Requests - Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorResponse'
+components:
+  schemas:
+    AliveResponse:
+      type: string
+      example: "Welcome to the weather API!"
+
+    WeatherResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the city.
+          example: São Paulo
+        weather:
+          type: array
+          description: Weather conditions in the city.
+          items:
+            type: object
+            properties:
+              main:
+                type: string
+                description: Primary weather condition.
+                example: Rain
+              description:
+                type: string
+                description: Detailed weather condition.
+                example: "light rain"
+        main:
+          type: object
+          description: Main weather metrics.
+          properties:
+            temp:
+              type: number
+              description: Current temperature in Celsius (rounded).
+              example: 27
+            feels_like:
+              type: number
+              description: Feels-like temperature in Celsius (rounded).
+              example: 29
+            temp_min:
+              type: number
+              description: Minimum temperature in Celsius (rounded).
+              example: 22
+            temp_max:
+              type: number
+              description: Maximum temperature in Celsius (rounded).
+              example: 30
+        visibility:
+          type: number
+          description: Visibility in meters.
+          example: 10000
+        wind:
+          type: object
+          description: Wind information.
+          properties:
+            speed:
+              type: number
+              description: Wind speed in meters per second.
+              example: 5.5
+            deg:
+              type: number
+              description: Wind direction in degrees.
+              example: 180
+
+    BadRequestResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Bad Request"
+
+    UnauthorizedResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Unauthorized"
+
+    NotFoundResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Not found"
+
+    TooManyRequestsResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Too Many Requests"
+
+    InternalServerErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Internal Server Error"
