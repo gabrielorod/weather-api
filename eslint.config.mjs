@@ -1,16 +1,19 @@
 import globals from 'globals';
-import prettierPlugin from 'eslint-plugin-prettier'; // Substituindo require pelo import
+import prettierPlugin from 'eslint-plugin-prettier';
 
-/** @type {import('eslint').Linter.Config[]} */
+/** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
   {
-    ignores: ['node_modules/**', 'dist/**'], // Substitui .eslintignore
+    ignores: ['node_modules/**', 'dist/**', 'weatherConsole/**'],
   },
   {
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
     },
     plugins: {
       prettier: prettierPlugin,
@@ -19,6 +22,9 @@ export default [
       'prettier/prettier': 'error',
       'no-unused-vars': 'warn',
       eqeqeq: 'error',
+      'no-console': 'off',
+      semi: ['error', 'always'],
+      quotes: ['error', 'single'],
     },
   },
 ];

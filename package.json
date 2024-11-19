@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "app/src/app.js",
   "scripts": {
+    "console": "node app/src/scripts/weatherConsole.js",
     "start": "node app/src/app.js",
     "dev": "nodemon app/src/app.js",
     "lint": "eslint \"src/**/*.js\"",
