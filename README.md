@@ -48,7 +48,7 @@ O servidor estara rodando na porta `3000` por padrão.
 ### 5. Testar a API
 
 Você pode testar a API utilizando ferramentas como **Postman** ou **CURL**. Para testar, faça uma requisição GET para a URL `http://localhost:3000/weather/{city}`, substituindo `{city}` pelo nome de uma cidade, por exemplo:
-http://localhost:3000/weather/SaoPaulo
+http://localhost:3000/weather/Campinas
 
 ## Licença
 
